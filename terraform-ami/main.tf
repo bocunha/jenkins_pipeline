@@ -2,8 +2,12 @@ provider "aws" {
   region = "sa-east-1"
 }
 
+locals {
+  date = "${formatdate("hhmmss", timestamp())}"
+}
+
 resource "aws_ami_from_instance" "ami-jenkins" {
-  name               = "ortaleb-terraform-jenkins-${var.versao}"
+  name               = "ortaleb-terraform-jenkins-${var.versao}-${local.date}"
   source_instance_id = var.resource_id
 }
 
