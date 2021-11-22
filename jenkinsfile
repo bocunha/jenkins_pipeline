@@ -9,22 +9,22 @@ pipeline {
         }
         stage('Build EC2') {
             steps {
-                sh "deploy.sh"
+                sh "./deploy.sh"
             }
         }
         stage('Test Nginx') {
             steps {
-                sh "test.sh"
+                sh "./test.sh"
             }
         }
         stage('Build AMI') {
             steps {
-                sh "package-ami.sh"
+                sh "./package-ami.sh"
             }
         }
         stage('Destroy Test EC2') {
             steps {
-                sh "destroy.sh"
+                sh "./destroy.sh"
             }
         }
     }

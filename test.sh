@@ -1,7 +1,7 @@
 #!/bin/bash
-cd deploy-infra-img-java-app/terraform
+cd ./terraform
 
-uri=$(/home/ubuntu/terraform output | grep public_ip | awk '{print $2;exit}' | sed -e "s/\",//g")
+uri=$(terraform output | grep public_ip | awk '{print $2;exit}' | sed -e "s/\",//g")
 
 echo $uri
 
