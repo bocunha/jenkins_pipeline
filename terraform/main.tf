@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-1"
+  region = "sa-east-1"
 }
 
 data "http" "myip" {
@@ -7,11 +7,19 @@ data "http" "myip" {
 }
 
 resource "aws_instance" "dev_img_deploy_jenkins" {
-  ami           = "ami-09e67e426f25ce0d7"
+  subnet_id     = "subnet-0958c1cc0f3c9b493"
+  ami                         = "ami-0e66f5495b4efdd0f" #ubuntu
   instance_type = "t2.micro"
-  key_name      = "chave-jenkins"
+  key_name = "ortaleb-chave-nova"
   tags = {
-    Name = "dev_img_deploy_jenkins"
+    Name = "dev-img-jenkis-ortaleb"
+    KubernetesCluster = "UCPKubenertesCluster"
+    Owner = "ortaleb"
+  }
+    associate_public_ip_address = true
+    root_block_device {
+    encrypted = true
+    volume_size = 8
   }
   vpc_security_group_ids = [aws_security_group.acesso_jenkins_dev_img.id]
 }
@@ -19,6 +27,7 @@ resource "aws_instance" "dev_img_deploy_jenkins" {
 resource "aws_security_group" "acesso_jenkins_dev_img" {
   name        = "acesso_jenkins_dev_img"
   description = "acesso_jenkins_dev_img inbound traffic"
+  vpc_id      = "vpc-063c0ac3627af3dba"
 
   ingress = [
     {

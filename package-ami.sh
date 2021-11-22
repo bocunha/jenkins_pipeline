@@ -2,7 +2,7 @@
 
 VERSAO=$(git describe --tags $(git rev-list --tags --max-count=1))
 
-cd 08-jenkins/deploy-infra-img-java-app/terraform
+cd terraform
 RESOURCE_ID=$(/home/ubuntu/terraform output | grep resource_id | awk '{print $2;exit}' | sed -e "s/\",//g")
 
 cd ../terraform-ami

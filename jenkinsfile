@@ -4,27 +4,27 @@ pipeline {
     stages {
         stage('Clone repo') {
             steps {
-                git url: 'https://github.com/Didox/treinamento-devops', branch: 'main'
+                git url: 'https://github.com/bocunha/jenkins_pipeline.git', branch: 'main'
             }
         }
         stage('Build EC2') {
             steps {
-                sh "08-jenkins/deploy-infra-img-java-app/deploy.sh"
+                sh "deploy.sh"
             }
         }
         stage('Test Nginx') {
             steps {
-                sh "08-jenkins/deploy-infra-img-java-app/test.sh"
+                sh "test.sh"
             }
         }
         stage('Build AMI') {
             steps {
-                sh "08-jenkins/deploy-infra-img-java-app/package-ami.sh"
+                sh "package-ami.sh"
             }
         }
         stage('Destroy Test EC2') {
             steps {
-                sh "08-jenkins/deploy-infra-img-java-app/destroy.sh"
+                sh "destroy.sh"
             }
         }
     }

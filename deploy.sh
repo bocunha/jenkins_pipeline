@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd 08-jenkins/deploy-infra-img-java-app/terraform
+cd deploy-infra-img-java-app/terraform
 /home/ubuntu/terraform init
 /home/ubuntu/terraform apply -auto-approve
 
